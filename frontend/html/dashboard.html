@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Dashboard</title>
+  <!-- Link to the external CSS file for styling -->
+  <link rel="stylesheet" href="../css/dashboard.css">
+</head>
+<body>
+  <!-- Central dashboard container -->
+  <div class="dashboard-container">
+    <h1>Welcome to Your Dashboard</h1>
+    <!-- Navigation for all users -->
+    <nav>
+      <ul>
+        <li><a href="search.html">Search Properties</a></li>
+        <!-- The booking management link is role-specific -->
+        <li>
+          <!-- Booking link for renters; hidden for agents via JS -->
+          <a href="bookings.html" id="renter-bookings-link">My Bookings</a>
+          <!-- Booking link for agents; hidden for renters via JS -->
+          <a href="bookings.html" id="agent-bookings-link">Bookings for My Properties</a>
+        </li>
+        <!-- Only agents see the manage properties link -->
+        <li id="manage-properties-link"><a href="properties.html">Manage Properties</a></li>
+        <!-- Only renters see the payment/address management link -->
+        <li id="payment-link"><a href="payment.html">Manage Payment & Addresses</a></li>
+        <li><a href="login.html">Logout</a></li>
+      </ul>
+    </nav>
+    <!-- Dashboard content area (optional for stats, welcome, etc.) -->
+    <div id="dashboard-message">
+      <!-- Message will be set by JS based on role -->
+    </div>
+  </div>
+  <!-- Link to the external JavaScript file for role logic -->
+  <script src="../js/dashboard.js"></script>
+</body>
+</html>
