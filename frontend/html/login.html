@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Login - Real Estate App</title>
-    <link rel="stylesheet" href="css/style.css">
+  <title>Login</title>
+  <!-- styling -->
+  <link rel="stylesheet" href="../css/login.css">
 </head>
 <body>
-    <h2>Login</h2>
-    <form id="loginForm">
-        <label for="name">Name or Email:</label>
-        <input type="text" id="name" name="name" required>
+  <!--the login box -->
+  <div class="login-container">
+    <!-- Login form box -->
+    <form id="loginForm" class="login-box">
+      <h2>Login</h2>
+      <!-- Email  -->
+      <label for="email">Email Address</label>
+      <input type="email" id="email" name="email" required>
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+      <!-- Password  -->
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" required>
 
-        <label for="role">Role:</label>
-        <select id="role" name="role" required>
-            <option value="">--Select Role--</option>
-            <option value="renter">Renter</option>
-            <option value="agent">Agent</option>
-        </select>
+      <!-- Role selection  -->
+      <label for="role">Role</label>
+      <select id="role" name="role" required>
+        <option value="">--Select Role--</option>
+        <option value="renter">Renter</option>
+        <option value="agent">Agent</option>
+      </select>
 
-        <button type="submit">Login</button>
+      <!-- Submit button -->
+      <button type="submit">Login</button>
     </form>
-    <script src="js/login.js"></script>
+  </div>
+  <!-- JavaScript -->
+  <script src="../js/login.js"></script>
 </body>
 </html>
