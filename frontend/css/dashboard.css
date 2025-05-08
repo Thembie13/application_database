@@ -1,47 +1,81 @@
-/* Base styles for the dashboard page */
+/* Set up full height and reset margins */
 html, body {
   height: 100%;
   margin: 0;
-  padding: 0;
   font-family: Arial, sans-serif;
   background: #f7f7f7;
 }
 
-/* Center the dashboard container */
-.dashboard-container {
-  max-width: 480px;
-  margin: 60px auto;
-  background: #fff;
-  padding: 2em 2.5em;
-  border-radius: 8px;
-  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
-  text-align: center;
+/* Dashboard grid container */
+.dashboard {
+  display: grid;
+  grid-template-columns: 220px 1fr; /* Sidebar fixed width + main content */
+  grid-template-rows: 60px 1fr;     /* Header + content */
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  height: 100vh; /* Full viewport height */
 }
 
-/* Navigation styles */
-nav ul {
+/* Header styles */
+.header {
+  grid-area: header;
+  background: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Sidebar styles */
+.sidebar {
+  grid-area: sidebar;
+  background: #222;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Sidebar navigation */
+.sidebar nav ul {
   list-style: none;
   padding: 0;
-  margin: 1.5em 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1em;
+  margin: 0;
 }
 
-nav a {
+.sidebar nav ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+  color: white;
   text-decoration: none;
-  color: #007bff;
-  font-size: 1.1em;
-  transition: color 0.2s;
+  font-size: 1em;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
 }
 
-nav a:hover {
-  color: #0056b3;
+.sidebar nav ul li a:hover {
+  background-color: #0056b3;
 }
 
-/* Optional: Style for the dashboard message */
-#dashboard-message {
-  margin-top: 2em;
-  color: #333;
-  font-size: 1.1em;
+/* Main content area */
+.main-content {
+  grid-area: main;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
 }
+
+/* Hide role-specific links by default */
+#renter-bookings-link,
+#agent-bookings-link,
+#manage-properties-link,
+#payment-link {
+  display: none;
+}
+
