@@ -18,4 +18,6 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
     return;
   }
 
+  // Redirect to dashboard
+  window.location.href = 'dashboard.html'; //goes to dashboard 
 });
