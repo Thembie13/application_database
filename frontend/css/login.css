@@ -68,3 +68,20 @@ html, body {
 .login-box button:hover {
   background: #0056b3;
 }
+
+/* Style for the register button */ 
+#registerButton { 
+  padding: 0.7em;
+  background: green;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+/* darker green on hover */
+#registerButton:hover { 
+  background: #218838;
+}
