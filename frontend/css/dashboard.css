@@ -1,0 +1,81 @@
+/* Set up full height and reset margins */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f7f7f7;
+}
+
+/* Dashboard grid container */
+.dashboard {
+  display: grid;
+  grid-template-columns: 220px 1fr; /* Sidebar fixed width + main content */
+  grid-template-rows: 60px 1fr;     /* Header + content */
+  grid-template-areas:
+    "header header"
+    "sidebar main";
+  height: 100vh; /* Full viewport height */
+}
+
+/* Header styles */
+.header {
+  grid-area: header;
+  background: #007bff;
+  color: white;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Sidebar styles */
+.sidebar {
+  grid-area: sidebar;
+  background: #222;
+  color: white;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Sidebar navigation */
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar nav ul li {
+  margin-bottom: 15px;
+}
+
+.sidebar nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-size: 1em;
+  display: block;
+  padding: 8px 12px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.sidebar nav ul li a:hover {
+  background-color: #0056b3;
+}
+
+/* Main content area */
+.main-content {
+  grid-area: main;
+  background: white;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+/* Hide role-specific links by default */
+#renter-bookings-link,
+#agent-bookings-link,
+#manage-properties-link,
+#payment-link {
+  display: none;
+}
+
