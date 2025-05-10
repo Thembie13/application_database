@@ -1,28 +1,55 @@
-// Example: Simulate getting the user's role from session/localStorage
-// In a real app, replace this with actual authentication logic
-// Possible values: "renter" or "agent"
-const userRole = localStorage.getItem('role') || 'renter'; // Default to renter for demo
+// Get user role from storage or default to 'renter'
+const userRole = localStorage.getItem('role') || 'renter';
 
-// Get references to role-specific elements
+// Sidebar role-specific links
 const renterBookingsLink = document.getElementById('renter-bookings-link');
 const agentBookingsLink = document.getElementById('agent-bookings-link');
 const managePropertiesLink = document.getElementById('manage-properties-link');
-const paymentLink = document.getElementById('payment-link');
-const dashboardMessage = document.getElementById('dashboard-message');
+const paymentLink = document.getElementById('payment-link'); 
 
-// Show/hide links and set messages based on user role
+// Dashboard sections
+const renterDashboard = document.getElementById('renter-dashboard');
+const agentDashboard = document.getElementById('agent-dashboard');
+
+// Rewards points (simulate with a number; replace with real data)
+const renterPoints = document.getElementById('renter-points');
+
+// User profile dropdown logic
+const userProfile = document.getElementById('user-profile');
+const profileDropdown = document.getElementById('profile-dropdown');
+let dropdownOpen = false;
+
+userProfile.addEventListener('click', function() {
+  dropdownOpen = !dropdownOpen;
+  profileDropdown.style.display = dropdownOpen ? 'flex' : 'none';
+});
+
+document.addEventListener('click', function(event) {
+  if (!userProfile.contains(event.target)) {
+    profileDropdown.style.display = 'none';
+    dropdownOpen = false;
+  }
+});
+
+// Show/hide links and dashboard sections based on user role
 if (userRole === 'renter') {
-  // Show renter-specific links, hide agent ones
-  renterBookingsLink.style.display = 'inline';
+  renterBookingsLink.style.display = 'block';
+  paymentLink.style.display = 'block';
   agentBookingsLink.style.display = 'none';
   managePropertiesLink.style.display = 'none';
-  paymentLink.style.display = 'list-item';
-  dashboardMessage.textContent = "You are logged in as a Renter. Here you can search properties, book, and manage your bookings and payment info.";
+  renterDashboard.style.display = 'block';
+  agentDashboard.style.display = 'none';
+  // Simulate points (replace with real logic)
+  renterPoints.textContent = "Points: 120";
 } else if (userRole === 'agent') {
-  // Show agent-specific links, hide renter ones
+  agentBookingsLink.style.display = 'block';
+  managePropertiesLink.style.display = 'block';
   renterBookingsLink.style.display = 'none';
-  agentBookingsLink.style.display = 'inline';
-  managePropertiesLink.style.display = 'list-item';
   paymentLink.style.display = 'none';
-  dashboardMessage.textContent = "You are logged in as an Agent. Here you can manage your properties and view bookings for your listings.";
+  agentDashboard.style.display = 'block';
+  renterDashboard.style.display = 'none';
 }
+
+// Optionally, set the username in the profile (replace with real user data)
+document.getElementById('user-name').textContent = localStorage.getItem('username') || "User";
+

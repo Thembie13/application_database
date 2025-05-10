@@ -2,37 +2,66 @@
 <html lang="en">
 <head>
   <title>Dashboard</title>
-  <!-- Link to the external CSS file for styling -->
   <link rel="stylesheet" href="../css/dashboard.css">
 </head>
 <body>
-  <!-- Central dashboard container -->
-  <div class="dashboard-container">
-    <h1>Welcome to Your Dashboard</h1>
-    <!-- Navigation for all users -->
-    <nav>
-      <ul>
-        <li><a href="search.html">Search Properties</a></li>
-        <!-- The booking management link is role-specific -->
-        <li>
-          <!-- Booking link for renters; hidden for agents via JS -->
-          <a href="bookings.html" id="renter-bookings-link">My Bookings</a>
-          <!-- Booking link for agents; hidden for renters via JS -->
-          <a href="bookings.html" id="agent-bookings-link">Bookings for My Properties</a>
-        </li>
-        <!-- Only agents see the manage properties link -->
-        <li id="manage-properties-link"><a href="properties.html">Manage Properties</a></li>
-        <!-- Only renters see the payment/address management link -->
-        <li id="payment-link"><a href="payment.html">Manage Payment & Addresses</a></li>
-        <li><a href="login.html">Logout</a></li>
-      </ul>
-    </nav>
-    <!-- Dashboard content area (optional for stats, welcome, etc.) -->
-    <div id="dashboard-message">
-      <!-- Message will be set by JS based on role -->
-    </div>
+  <div class="dashboard">
+    <!-- Header with user profile dropdown -->
+    <header class="header">
+      <div class="header-title">Dashboard</div>
+      <div class="user-profile" id="user-profile">
+        <span id="user-name">User</span>
+        <div class="profile-dropdown" id="profile-dropdown">
+          <a href="#">Settings</a>
+          <a href="login.html">Logout</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sidebar navigation -->
+    <aside class="sidebar">
+      <nav>
+        <ul>
+          <li><a href="search.html">Property Search/Listings</a></li>
+          <li id="renter-bookings-link"><a href="bookings.html">My Bookings</a></li>
+          <li id="agent-bookings-link"><a href="bookings.html">Bookings for My Properties</a></li>
+          <li id="manage-properties-link"><a href="properties.html">Manage Properties</a></li>
+          <li id="payment-link"><a href="payment.html">Manage Payment & Addresses</a></li>
+          <li><a href="login.html">Logout</a></li>
+        </ul>
+      </nav>
+    </aside>    
+
+    <!-- Main content area -->
+    <main class="main-content">
+      <!-- Renter dashboard -->
+      <section id="renter-dashboard">
+        <h2>Renter Dashboard</h2>
+        <div class="quick-links">
+          <a href="search.html">Search Properties</a>
+          <a href="bookings.html">Manage Bookings</a>
+          <a href="payment.html">Manage Payments & Addresses</a>
+        </div>
+        <div class="rewards-section">
+          <h3>Your Rewards</h3>
+          <div class="reward-info">
+            <span id="renter-points">Points: 0</span>
+            <a href="rewards.html" class="rewards-link">View & Redeem Rewards</a>
+          </div>
+        </div>
+      </section>
+      <!-- Agent dashboard -->
+      <section id="agent-dashboard">
+        <h2>Agent Dashboard</h2>
+        <div class="quick-links">
+          <a href="search.html">Property Search/Listings</a>
+          <a href="bookings.html">Manage Bookings for My Properties</a>
+          <a href="properties.html">Manage Properties</a>
+        </div>
+      </section>
+    </main>
   </div>
-  <!-- Link to the external JavaScript file for role logic -->
   <script src="../js/dashboard.js"></script>
 </body>
 </html>
+

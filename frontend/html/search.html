@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Property Search</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="../css/search.css">
+</head>
+<body>
+  <!-- Top Navigation Bar -->
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="bookings.html" class="nav-link">Bookings</a>
+      <!-- Payment/Properties link will be shown/hidden by JS based on role -->
+      <a href="payment.html" class="nav-link" id="payments-link">Payments</a>
+      <a href="properties.html" class="nav-link" id="manage-properties-link">Manage Properties</a>
+    </div>
+    <div class="nav-right">
+      <span id="user-name" class="user-name">User</span>
+      <a href="login.html" class="nav-link">Logout</a>
+    </div>
+  </nav>
+
+  <!-- Search and Filters Section -->
+  <section class="search-section">
+    <form action="/search_properties" method="GET" id="searchForm" class="search-form">
+      <input type="text" name="location" placeholder="Search by location, city, zip code..." required>
+
+      <input type="date" name="available_date" title="Availability Date">
+
+      <select name="property_type">
+        <option value="">Property Type</option>
+        <option value="apartment">Apartment</option>
+        <option value="house">House</option>
+        <option value="condo">Condo</option>
+        <option value="townhouse">Townhouse</option>
+      </select>
+
+      <input type="number" name="min_price" placeholder="Min Price" min="0">
+      <input type="number" name="max_price" placeholder="Max Price" min="0">
+
+      <select name="bedrooms">
+        <option value="">Bedrooms</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+        <option value="4">4+</option>
+      </select>
+
+      <select name="bathrooms">
+        <option value="">Bathrooms</option>
+        <option value="1">1+</option>
+        <option value="2">2+</option>
+        <option value="3">3+</option>
+      </select>
+
+      <!-- Amenities as checkboxes -->
+      <div class="amenities-group">
+        <label><input type="checkbox" name="amenities" value="wifi"> WiFi</label>
+        <label><input type="checkbox" name="amenities" value="pet-friendly"> Pet-friendly</label>
+        <label><input type="checkbox" name="amenities" value="parking"> Parking</label>
+        <label><input type="checkbox" name="amenities" value="pool"> Pool</label>
+      </div>
+
+      <!-- Order By -->
+      <select name="order_by">
+        <option value="">Order By</option>
+        <option value="price">Price</option>
+        <option value="bedrooms">Bedrooms</option>
+      </select>
+
+      <button type="submit">Search</button>
+    </form>
+  </section>
+
+  <!-- Property Listings Area -->
+  <section class="listings-section">
+    <!-- Example property card; repeat for each property from backend -->
+    <div class="property-card">
+      <img src="../images/sample-property.jpg" alt="Property Image" class="property-image">
+      <div class="property-info">
+        <h3 class="property-title">2BR Apartment in Downtown</h3>
+        <p class="property-desc">Modern apartment with WiFi, parking, and pool access.</p>
+        <div class="property-details">
+          <span class="property-price">$1200/month</span>
+          <span class="property-location">New York, NY</span>
+        </div>
+        <form action="/property_details" method="GET">
+          <input type="hidden" name="property_id" value="123">
+          <button type="submit" class="view-details-btn">View Details</button>
+        </form>
+      </div>
+    </div>
+    <!-- More property cards will be rendered here -->
+  </section>
+
+  <script src="../js/search.js"></script>
+</body>
+</html>
