@@ -1,8 +1,8 @@
-from flask import Flask
+from flask import Flask, request, jsonify, redirect, render_template
 import psycopg2
 
 app = Flask(__name__)
-# --- Database Connection ---
+
 def get_connection():
     return psycopg2.connect(
         url="localhost",
@@ -11,7 +11,8 @@ def get_connection():
         password="BDLV25",     
         port=5432
     )
- 
+
+#method requirements
 def register_user(email_address, name, address_id, preferred_location, is_agent=False, agent_info=None, is_renter=False, renter_preference=None):
     conn = get_connection()
     cursor = conn.cursor()
@@ -152,3 +153,103 @@ def book_property(booking_id, start_date, end_date, total_cost, card_number, pro
     finally:
         cursor.close()
         conn.close()
+
+#flask routes
+
+@app.route("/register_user", methods=["POST"])
+def register_user_route():
+    data = request.form
+    email = data.get("email")
+    name = data.get("name")
+    role = data.get("role")
+
+    is_agent = (role == "agent")
+    is_renter = (role == "renter")
+
+    try:
+        register_user(
+            email_address=email,
+            name=name,
+            address_id=None,
+            preferred_location="N/A",
+            is_agent=is_agent,
+            agent_info=("Agent", "Generic Agency", "123-456-7890") if is_agent else None,
+            is_renter=is_renter,
+            renter_preference="Quiet" if is_renter else None
+        )
+        return redirect("/login")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/login", methods=["POST"])
+def login():
+    data = request.form
+    email = data.get("email")
+    password = data.get("password")  # Password is not implemented yet
+    role = data.get("role")
+
+    # TODO: Implement actual login validation logic
+    return redirect("/dashboard.html")
+
+from flask import render_template
+
+@app.route("/search_properties", methods=["GET"])
+def search_properties_route():
+    location = request.args.get("location")
+    max_price = request.args.get("max_price", type=float)
+    min_rooms = request.args.get("number_of_rooms", type=int)
+    available = request.args.get("availability", "true").lower() == "true"
+
+    try:
+        results = search_properties(location, max_price, min_rooms, available)
+        return render_template("search_results.html", properties=results)
+    except Exception as e:
+        return render_template("search_results.html", properties=[], error=str(e))
+
+@app.route("/property/add", methods=["POST"])
+def add_property_route():
+    data = request.json
+    try:
+        add_property(
+            data["property_id"], data["type"], data["location"], data["description"],
+            data["price"], data["availability"], data["square_footage"],
+            data["number_of_rooms"], data["building_type"], data["business_type"],
+            data["neighborhood_id"], data["agent_email"]
+        )
+        return jsonify({"status": "success"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/property/modify", methods=["PUT"])
+def modify_property_route():
+    data = request.json
+    try:
+        modify_property(data["property_id"], data["field"], data["new_value"])
+        return jsonify({"status": "success"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/property/delete/<property_id>", methods=["DELETE"])
+def delete_property_route(property_id):
+    try:
+        delete_property(property_id)
+        return jsonify({"status": "deleted"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+@app.route("/booking", methods=["POST"])
+def book_property_route():
+    data = request.json
+    try:
+        book_property(
+            data["booking_id"], data["start_date"], data["end_date"],
+            data["total_cost"], data["card_number"], data["property_id"],
+            data["email_address"]
+        )
+        return jsonify({"status": "booked"})
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
