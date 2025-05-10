@@ -15,3 +15,33 @@ def establish_connection():
         conn.close()
     except Exception as e:
         print("An error occurred: ", e)
+
+    '''
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    '''
