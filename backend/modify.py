@@ -11,7 +11,7 @@ def get_connection():
         password="BDLV25",     
         port=5432
     )
-# --- Register Users --- 
+ 
 def register_user(email_address, name, address_id, preferred_location, is_agent=False, agent_info=None, is_renter=False, renter_preference=None):
     conn = get_connection()
     cursor = conn.cursor()
@@ -28,7 +28,7 @@ def register_user(email_address, name, address_id, preferred_location, is_agent=
         cursor.close()
         conn.close()
 
-# --- Add Addresses ---
+
 def add_address(address_id, street, city, state, zip_code):
     conn = get_connection()
     cursor = conn.cursor()
@@ -39,7 +39,7 @@ def add_address(address_id, street, city, state, zip_code):
         cursor.close()
         conn.close()
 
-# --- Add Credit Card ---
+
 def add_credit_card(card_number, expiry_date, payment_address, email_address):
     conn = get_connection()
     cursor = conn.cursor()
@@ -50,7 +50,7 @@ def add_credit_card(card_number, expiry_date, payment_address, email_address):
         cursor.close()
         conn.close()
 
-# --- Add neighborhood ---
+
 def add_neighborhood(neighborhood_id, crime_rates):
     conn = get_connection
     cursor = conn.cursor()
@@ -61,7 +61,7 @@ def add_neighborhood(neighborhood_id, crime_rates):
         cursor.close()
         conn.close()
 
-# --- Add nearby schools --- 
+
 def add_nearby_school(neighborhood_id, school_name, crime_rates):
     conn = get_connection()
     cursor = conn.cursor()
@@ -71,6 +71,7 @@ def add_nearby_school(neighborhood_id, school_name, crime_rates):
     finally:
         cursor.close()
         conn.close()
+
 
 def add_property(property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id, agent_email):
     conn = get_connection()
@@ -87,6 +88,7 @@ def add_property(property_id, type, location, description, price, availability, 
         cursor.close()
         conn.close()
 
+
 def modify_property(property_id, field, new_value):
     conn = get_connection()
     cursor = conn.cursor()
@@ -97,6 +99,19 @@ def modify_property(property_id, field, new_value):
     finally:
         cursor.close()
         conn.close()
+
+
+def delete_property(property_id):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("DELETE FROM modifies WHERE property_id = %s", (property_id,))
+        cursor.execute("DELETE FROM property WHERE property_id = %s", (property_id,))
+        conn.commit()
+    finally:
+        cursor.close()
+        conn.close()
+
 
 def search_properties(location=None, max_price=None, min_rooms=None, available_only=True):
     conn = get_connection()
@@ -123,6 +138,7 @@ def search_properties(location=None, max_price=None, min_rooms=None, available_o
     finally:
         cursor.close()
         conn.close()
+
 
 def book_property(booking_id, start_date, end_date, total_cost, card_number, property_id, email_address):
     conn = get_connection()
