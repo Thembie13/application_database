@@ -11,7 +11,6 @@
     <div class="nav-left">
       <a href="dashboard.html" class="nav-link">Dashboard</a>
       <a href="bookings.html" class="nav-link">Bookings</a>
-      <!-- Payment/Properties link will be shown/hidden by JS based on role -->
       <a href="payment.html" class="nav-link" id="payments-link">Payments</a>
       <a href="properties.html" class="nav-link" id="manage-properties-link">Manage Properties</a>
     </div>
@@ -24,76 +23,78 @@
   <!-- Search and Filters Section -->
   <section class="search-section">
     <form action="/search_properties" method="GET" id="searchForm" class="search-form">
-      <input type="text" name="location" placeholder="Search by location, city, zip code..." required>
-
-      <input type="date" name="available_date" title="Availability Date">
-
-      <select name="property_type">
-        <option value="">Property Type</option>
+      <input type="text" name="location" placeholder="City, State or Zip" required>
+      <select name="type">
+        <option value="">Type</option>
         <option value="apartment">Apartment</option>
         <option value="house">House</option>
         <option value="condo">Condo</option>
         <option value="townhouse">Townhouse</option>
       </select>
-
       <input type="number" name="min_price" placeholder="Min Price" min="0">
       <input type="number" name="max_price" placeholder="Max Price" min="0">
-
-      <select name="bedrooms">
-        <option value="">Bedrooms</option>
+      <select name="availability">
+        <option value="">Availability</option>
+        <option value="true">Available</option>
+        <option value="false">Not Available</option>
+      </select>
+      <input type="number" name="min_sqft" placeholder="Min Sq. Ft." min="0">
+      <input type="number" name="max_sqft" placeholder="Max Sq. Ft." min="0">
+      <select name="number_of_rooms">
+        <option value="">Rooms</option>
         <option value="1">1+</option>
         <option value="2">2+</option>
         <option value="3">3+</option>
         <option value="4">4+</option>
       </select>
-
-      <select name="bathrooms">
-        <option value="">Bathrooms</option>
-        <option value="1">1+</option>
-        <option value="2">2+</option>
-        <option value="3">3+</option>
+      <select name="building_type">
+        <option value="">Building Type</option>
+        <option value="high-rise">High-rise</option>
+        <option value="low-rise">Low-rise</option>
+        <option value="detached">Detached</option>
+        <option value="semi-detached">Semi-detached</option>
       </select>
-
-      <!-- Amenities as checkboxes -->
-      <div class="amenities-group">
-        <label><input type="checkbox" name="amenities" value="wifi"> WiFi</label>
-        <label><input type="checkbox" name="amenities" value="pet-friendly"> Pet-friendly</label>
-        <label><input type="checkbox" name="amenities" value="parking"> Parking</label>
-        <label><input type="checkbox" name="amenities" value="pool"> Pool</label>
-      </div>
-
-      <!-- Order By -->
+      <select name="business_type">
+        <option value="">Business Type</option>
+        <option value="rental">Rental</option>
+        <option value="sale">Sale</option>
+      </select>
       <select name="order_by">
         <option value="">Order By</option>
         <option value="price">Price</option>
-        <option value="bedrooms">Bedrooms</option>
+        <option value="number_of_rooms">Rooms</option>
+        <option value="square_footage">Sq. Ft.</option>
       </select>
-
       <button type="submit">Search</button>
     </form>
   </section>
 
-  <!-- Property Listings Area -->
+  <!-- Property Listings Table -->
   <section class="listings-section">
-    <!-- Example property card; repeat for each property from backend -->
-    <div class="property-card">
-      <img src="../images/sample-property.jpg" alt="Property Image" class="property-image">
-      <div class="property-info">
-        <h3 class="property-title">2BR Apartment in Downtown</h3>
-        <p class="property-desc">Modern apartment with WiFi, parking, and pool access.</p>
-        <div class="property-details">
-          <span class="property-price">$1200/month</span>
-          <span class="property-location">New York, NY</span>
-        </div>
-        <form action="/property_details" method="GET">
-          <input type="hidden" name="property_id" value="123">
-          <button type="submit" class="view-details-btn">View Details</button>
-        </form>
-      </div>
-    </div>
-    <!-- More property cards will be rendered here -->
+    <table class="property-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Type</th>
+          <th>Location</th>
+          <th>Description</th>
+          <th>Price</th>
+          <th>Availability</th>
+          <th>Sq. Ft.</th>
+          <th>Rooms</th>
+          <th>Building</th>
+          <th>Business</th>
+          <th>Neighborhood</th>
+          <th>View Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Property rows will be rendered here by backend -->
+      </tbody>
+    </table>
   </section>
 
   <script src="../js/search.js"></script>
 </body>
 </html>
+
