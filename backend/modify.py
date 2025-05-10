@@ -71,3 +71,68 @@ def add_nearby_school(neighborhood_id, school_name, crime_rates):
     finally:
         cursor.close()
         conn.close()
+
+def add_property(property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id, agent_email):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            INSERT INTO property (property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id)
+            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
+        """, (property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id))
+        
+        cursor.execute("INSERT INTO modifies (email_address, property_id) VALUES (%s, %s)", (agent_email, property_id))
+        conn.commit()
+    finally:
+        cursor.close()
+        conn.close()
+
+def modify_property(property_id, field, new_value):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        query = f"UPDATE property SET {field} = %s WHERE property_id = %s"
+        cursor.execute(query, (new_value, property_id))
+        conn.commit()
+    finally:
+        cursor.close()
+        conn.close()
+
+def search_properties(location=None, max_price=None, min_rooms=None, available_only=True):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        query = "SELECT * FROM property WHERE 1=1"
+        params = []
+
+        if location:
+            query += " AND location = %s"
+            params.append(location)
+        if max_price:
+            query += " AND price <= %s"
+            params.append(max_price)
+        if min_rooms:
+            query += " AND number_of_rooms >= %s"
+            params.append(min_rooms)
+        if available_only:
+            query += " AND availability = TRUE"
+
+        cursor.execute(query, tuple(params))
+        results = cursor.fetchall()
+        return results
+    finally:
+        cursor.close()
+        conn.close()
+
+def book_property(booking_id, start_date, end_date, total_cost, card_number, property_id, email_address):
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("INSERT INTO booking (booking_id, start_date, end_date, total_cost, card_number, property_id, email_address) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
+            (booking_id, start_date, end_date, total_cost, card_number, property_id, email_address))
+
+        cursor.execute("UPDATE property SET availability = FALSE WHERE property_id = %s", (property_id,))
+        conn.commit()
+    finally:
+        cursor.close()
+        conn.close()
