@@ -74,6 +74,7 @@ html, body {
   border-bottom: none;
 }
 
+
 .profile-dropdown a:hover {
   background: #f7f7f7;
 }
@@ -153,6 +154,7 @@ html, body {
   max-width: 350px;
 }
 
+/*for the reward */
 .reward-info {
   display: flex;
   align-items: center;
