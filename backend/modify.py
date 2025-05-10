@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-print("Start code")
 from flask import Flask
 import psycopg2
 
@@ -8,9 +6,9 @@ app = Flask(__name__)
 def get_connection():
     return psycopg2.connect(
         url="localhost",
-        database="Real Estate",  # Replace with your database name
-        user="postgres",            # Replace with your PostgreSQL username
-        password="BDLV25",     # Replace with your password
+        database="Real Estate",  
+        user="postgres",            
+        password="BDLV25",     
         port=5432
     )
 # --- Register Users --- 
