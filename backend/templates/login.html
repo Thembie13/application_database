@@ -3,7 +3,7 @@
 <head>
   <title>Login</title>
   <!-- styling -->
-  <link rel="stylesheet" href="../css/login.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/login.css') }}">
 </head>
 <body>
   <!--the login box -->
@@ -33,6 +33,6 @@
     </form>
   </div>
   <!-- JavaScript -->
-  <script src="../js/login.js"></script>
+  <script src="{{ url_for('static', filename='js/login.js') }}"></script>
 </body>
 </html>

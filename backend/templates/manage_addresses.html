@@ -3,18 +3,18 @@
 <head>
   <title>Manage Addresses</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../css/manage_payments.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/manage_addresses.css') }}">
 </head>
 <body>
   <nav class="top-nav">
     <div class="nav-left">
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
-      <a href="search.html" class="nav-link">Search</a>
-      <a href="manage_payments.html" class="nav-link">Payments</a>
+      <a href="{{ url_for('dashboard.html') }}" class="nav-link">Dashboard</a>
+      <a href="{{ url_for('search.html') }}" class="nav-link">Search</a>
+      <a href="{{ url_for('manage_payments.html') }}" class="nav-link">Payments</a>
     </div>
     <div class="nav-right">
       <span id="user-name" class="user-name">User</span>
-      <a href="login.html" class="nav-link">Logout</a>
+      <a href="{{ url_for('login.html') }}" class="nav-link">Logout</a>
     </div>
   </nav>
 
@@ -53,6 +53,6 @@
     </form>
   </section>
 
-  <script src="manage_addresses.js"></script>
+  <script src="{{ url_for('static', filename='js/manage_addresses.js') }}"></script>
 </body>
 </html>

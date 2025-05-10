@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify, redirect, render_template
 import psycopg2
+import uuid
 
 app = Flask(__name__)
 
@@ -318,6 +319,30 @@ def add_payment_route():
         return redirect("/manage_payments.html")
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+@app.route("/search")
+def search_page():
+    return render_template("search.html")
+
+@app.route("/manage")
+def manage_page():
+    return render_template("manage.html")
+
+@app.route("/manage_addresses")
+def manage_addresses_page():
+    return render_template("manage_addresses.html")
+
+@app.route("/manage_payments")
+def manage_payments_page():
+    return render_template("manage_payments.html")
+
+@app.route("/register")
+def register_page():
+    return render_template("register.html")
+
+@app.route("/login")
+def login_page():
+    return render_template("login.html")
 
 
 if __name__ == "__main__":

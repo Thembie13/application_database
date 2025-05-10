@@ -3,18 +3,18 @@
 <head>
   <title>Property Search</title>
   <meta charset="UTF-8">
-  <link rel="stylesheet" href="../css/search.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
 </head>
 <body>
   <!-- Top Navigation Bar -->
   <nav class="top-nav">
     <div class="nav-left">
-      <a href="dashboard.html" class="nav-link">Dashboard</a>
-      <a href="manage.html" class="nav-link">Bookings</a>
+      <a href="{{ url_for('dashboard.html') }}" class="nav-link">Dashboard</a>
+      <a href="{{ url_for('manage.html') }}" class="nav-link">Bookings</a>
     </div>
     <div class="nav-right">
       <span id="user-name" class="user-name">User</span>
-      <a href="login.html" class="nav-link">Logout</a>
+      <a href="{{ url_for('login.html') }}" class="nav-link">Logout</a>
     </div>
   </nav>
 
@@ -92,7 +92,7 @@
     </table>
   </section>
 
-  <script src="../js/search.js"></script>
+  <script src="{{ url_for('static', filename='js/search.js') }}"></script>
 </body>
 </html>
 

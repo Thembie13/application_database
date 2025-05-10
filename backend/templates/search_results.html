@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Search Results</title>
-  <link rel="stylesheet" href="../css/search.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
 </head>
 <body>
   <h2>Property Search Results</h2>
@@ -50,6 +50,6 @@
   {% endif %}
 
   <br>
-  <a href="/search.html">Back to Search</a>
+  <a href="{{ url_for('search.html') }}">Back to Search</a>
 </body>
 </html>
