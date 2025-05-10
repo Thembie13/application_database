@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Manage Addresses</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="manage_payments.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="search.html" class="nav-link">Search</a>
+      <a href="bookings.html" class="nav-link">Bookings</a>
+      <a href="manage_payments.html" class="nav-link">Payments</a>
+    </div>
+    <div class="nav-right">
+      <span id="user-name" class="user-name">User</span>
+      <a href="login.html" class="nav-link">Logout</a>
+    </div>
+  </nav>
+
+  <section class="main-section">
+    <h2>Addresses</h2>
+    <table class="address-table">
+      <thead>
+        <tr>
+          <th>Street</th>
+          <th>City</th>
+          <th>State</th>
+          <th>Zip</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="address-list">
+        <!-- Populated dynamically -->
+      </tbody>
+    </table>
+
+    <button id="show-add-address-form" class="add-btn">Add Address</button>
+
+    <form action="/add_or_edit_address" method="POST" id="address-form" class="hidden" autocomplete="off">
+      <input type="hidden" name="address_id" id="address_id">
+      <h3 id="address-form-title">Add Address</h3>
+      <label for="street">Street:</label>
+      <input type="text" name="street" id="street" required>
+      <label for="city">City:</label>
+      <input type="text" name="city" id="city" required>
+      <label for="state">State:</label>
+      <input type="text" name="state" id="state" required>
+      <label for="zip">Zip:</label>
+      <input type="text" name="zip" id="zip" required>
+      <button type="submit" class="save-btn">Save</button>
+      <button type="button" class="cancel-btn" onclick="hideAddressForm()">Cancel</button>
+    </form>
+  </section>
+
+  <script src="manage_addresses.js"></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Manage Payment Methods</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="manage_payments.css">
+</head>
+<body>
+  <nav class="top-nav">
+    <div class="nav-left">
+      <a href="dashboard.html" class="nav-link">Dashboard</a>
+      <a href="search.html" class="nav-link">Search</a>
+      <a href="bookings.html" class="nav-link">Bookings</a>
+      <a href="manage_addresses.html" class="nav-link">Addresses</a>
+    </div>
+    <div class="nav-right">
+      <span id="user-name" class="user-name">User</span>
+      <a href="login.html" class="nav-link">Logout</a>
+    </div>
+  </nav>
+
+  <section class="main-section">
+    <h2>Payment Methods</h2>
+    <table class="payment-table">
+      <thead>
+        <tr>
+          <th>Name on Card</th>
+          <th>Card Number</th>
+          <th>Exp. Date</th>
+          <th>Billing Address</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="payment-list">
+        <!-- Populated dynamically -->
+      </tbody>
+    </table>
+
+    <button id="show-add-form" class="add-btn">Add Payment Method</button>
+
+    <form action="/add_or_edit_payment" method="POST" id="payment-form" class="hidden" autocomplete="off">
+      <input type="hidden" name="payment_id" id="payment_id">
+      <h3 id="form-title">Add Payment Method</h3>
+      <label for="cc-name">Name on Card:</label>
+      <input id="cc-name" name="cc_name" autocomplete="cc-name" required>
+      <label for="cc-number">Card Number:</label>
+      <input id="cc-number" name="cc_number" autocomplete="cc-number" inputmode="numeric" maxlength="19" required>
+      <label for="cc-exp">Expiry (MM/YY):</label>
+      <input id="cc-exp" name="cc_exp" autocomplete="cc-exp" placeholder="MM/YY" maxlength="5" required>
+      <label for="cc-cvc">CVC:</label>
+      <input id="cc-cvc" name="cc_cvc" autocomplete="cc-csc" inputmode="numeric" maxlength="4" required>
+      <label for="billing_address_id">Billing Address:</label>
+      <select name="billing_address_id" id="billing_address_id" required>
+        <option value="">Select Address</option>
+        <!-- Populated dynamically -->
+      </select>
+      <button type="submit" class="save-btn">Save</button>
+      <button type="button" class="cancel-btn" onclick="hidePaymentForm()">Cancel</button>
+    </form>
+  </section>
+
+  <script src="manage_payments.js"></script>
+</body>
+</html>
