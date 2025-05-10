@@ -19,5 +19,5 @@ document.getElementById('registerForm').addEventListener('submit', function(e) {
   }
 
   // Redirect to dashboard
-  window.location.href = 'dashboard.html'; //goes to dashboard 
+  window.location.href = 'dashboard'; //goes to dashboard 
 });

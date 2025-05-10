@@ -15,11 +15,11 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
   localStorage.setItem('role', role);
 
   // Redirect to dashboard
-  window.location.href = '../html/dashboard.html'; //goes to dashboard 
+  window.location.href = '../dashboard'; //goes to dashboard 
 });
 
 // registration after click 
 document.getElementById('registerButton').addEventListener('click', function() { 
-  window.location.href = 'register.html'; // goes to registration 
+  window.location.href = 'register'; // goes to registration 
 }); 
 
