@@ -53,7 +53,7 @@ def add_credit_card(card_number, expiry_date, payment_address, email_address):
 
 
 def add_neighborhood(neighborhood_id, crime_rates):
-    conn = get_connection
+    conn = get_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("INSERT INTO neighborhood (neighborhood_id, crime_rates) VALUES (%s, %s)", (neighborhood_id, crime_rates))
