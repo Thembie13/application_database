@@ -5,7 +5,6 @@ html, body {
   background: #f7f7f7;
 }
 
-/* Dashboard grid layout */
 .dashboard {
   display: grid;
   grid-template-columns: 220px 1fr;
@@ -16,7 +15,6 @@ html, body {
   height: 100vh;
 }
 
-/* Header styles */
 .header {
   grid-area: header;
   background: #007bff;
@@ -80,7 +78,6 @@ html, body {
   background: #f7f7f7;
 }
 
-/* Sidebar styles */
 .sidebar {
   grid-area: sidebar;
   background: #222;
@@ -113,7 +110,6 @@ html, body {
   background-color: #0056b3;
 }
 
-/* Main content area */
 .main-content {
   grid-area: main;
   background: white;
@@ -173,13 +169,11 @@ html, body {
   color: #0056b3;
 }
 
-/* Hide both dashboards by default; JS will show the correct one */
 #renter-dashboard,
 #agent-dashboard {
   display: none;
 }
 
-/*renter dashboard */
 #renter-dashboard {
   background-color: #fff8f0;        
   color: #804000;                    
@@ -190,8 +184,6 @@ html, body {
   margin-top: 20px;
 }
 
-
-/*agent dashboard */
 #agent-dashboard {
   background-color: #f0f8ff;       
   color: #003d80;                  
@@ -202,7 +194,6 @@ html, body {
   margin-top: 20px;
 }
 
-/* Responsive: Stack sidebar on top on small screens */
 @media (max-width: 700px) {
   .dashboard {
     grid-template-columns: 1fr;
