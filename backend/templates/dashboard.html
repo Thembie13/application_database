@@ -14,7 +14,7 @@
         <span id="user-name">User</span>
         <div class="profile-dropdown" id="profile-dropdown">
           <a href="#">Settings</a>
-          <a href="{{ url_for('login.html') }}">Logout</a>
+          <a href="{{ url_for('login_page') }}">Logout</a>
         </div>
       </div>
     </header>
@@ -23,11 +23,11 @@
     <aside class="sidebar">
       <nav>
         <ul>
-          <li><a href="{{ url_for('search.html') }}">Property Search/Listings</a></li>
-          <li id="manage-link"><a href="{{ url_for('manage.html') }}">Manage Properties</a></li>
-          <li id="payments-link"><a href="{{ url_for('manage_payments.html') }}">Payments</a></li>
-          <li id="addresses-link"><a href="{{ url_for('manage_addresses.html') }}">Addresses</a></li>
-          <li><a href="{{ url_for('login.html') }}">Logout</a></li>
+          <li><a href="{{ url_for('search_page') }}">Property Search/Listings</a></li>
+          <li id="manage-link"><a href="{{ url_for('manage_page') }}">Manage Properties</a></li>
+          <li id="payments-link"><a href="{{ url_for('manage_payments_page') }}">Payments</a></li>
+          <li id="addresses-link"><a href="{{ url_for('manage_addresses_page') }}">Addresses</a></li>
+          <li><a href="{{ url_for('login_page') }}">Logout</a></li>
         </ul>
       </nav>
     </aside>    
@@ -38,25 +38,19 @@
       <section id="renter-dashboard">
         <h2>Renter Dashboard</h2>
         <div class="quick-links">
-          <a href="{{ url_for('search.html') }}">Property Search/Listings</a>
-          <a href="{{ url_for('manage.html') }}">Book Properties</a>
-          <a href="{{ url_for('manage_payments.html') }}">Payments</a>
-          <a href="{{ url_for('manage_addresses.html') }}">Addresses</a>
+          <a href="{{ url_for('search_page') }}">Property Search/Listings</a>
+          <a href="{{ url_for('manage_page') }}">Book Properties</a>
+          <a href="{{ url_for('manage_payments_page') }}">Payments</a>
+          <a href="{{ url_for('manage_addresses_page') }}">Addresses</a>
         </div>
-        <div class="rewards-section">
-          <h3>Your Rewards</h3>
-          <div class="reward-info">
-            <span id="renter-points">Points: 0</span>
-            <a href="{{ url_for('rewards.html') }}" class="rewards-link">View & Redeem Rewards</a>
-          </div>
-        </div>
+  
       </section>
       <!-- Agent dashboard -->
       <section id="agent-dashboard">
         <h2>Agent Dashboard</h2>
         <div class="quick-links">
-          <a href="{{ url_for('search.html') }}">Property Search/Listings</a>
-          <a href="{{ url_for('manage.html') }}">Manage Bookings for My Properties</a>
+          <a href="{{ url_for('search_page') }}">Property Search/Listings</a>
+          <a href="{{ url_for('manage_page') }}">Manage Bookings for My Properties</a>
         </div>
       </section>
     </main>
