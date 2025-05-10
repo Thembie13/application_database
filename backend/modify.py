@@ -177,21 +177,21 @@ def register_user_route():
             is_renter=is_renter,
             renter_preference="Quiet" if is_renter else None
         )
-        return redirect("/login")
+        return redirect("/dashboard")
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
 @app.route("/login", methods=["POST"])
 def login():
-    data = request.form
-    email = data.get("email")
-    password = data.get("password")  # Password is not implemented yet
-    role = data.get("role")
+    # Not secure - placeholder only
+    return redirect("/dashboard")
 
-    # TODO: Implement actual login validation logic
-    return redirect("/dashboard.html")
 
-from flask import render_template
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
 
 @app.route("/search_properties", methods=["GET"])
 def search_properties_route():
@@ -205,6 +205,23 @@ def search_properties_route():
         return render_template("search_results.html", properties=results)
     except Exception as e:
         return render_template("search_results.html", properties=[], error=str(e))
+
+
+@app.route("/submit_property", methods=["POST"])
+def submit_property_route():
+    data = request.form
+    try:
+        add_property(
+            data["property_id"], data["type"], data["location"], data["description"],
+            float(data["price"]), data["availability"].lower() == "available",
+            int(data["sq_ft"]), int(data["rooms"]),
+            data["building"], data["business"], data["neighborhood"],
+            "test_agent@example.com"
+        )
+        return redirect("/dashboard")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 
 @app.route("/property/add", methods=["POST"])
 def add_property_route():
@@ -220,6 +237,7 @@ def add_property_route():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
 @app.route("/property/modify", methods=["PUT"])
 def modify_property_route():
     data = request.json
@@ -229,6 +247,7 @@ def modify_property_route():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
 @app.route("/property/delete/<property_id>", methods=["DELETE"])
 def delete_property_route(property_id):
     try:
@@ -236,6 +255,25 @@ def delete_property_route(property_id):
         return jsonify({"status": "deleted"})
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+
+@app.route("/book_property", methods=["POST"])
+def book_property_form():
+    data = request.form
+    try:
+        book_property(
+            booking_id=str(uuid.uuid4()),
+            start_date=data["start_date"],
+            end_date=data["end_date"],
+            total_cost=1000.0,
+            card_number=data["payment_method_id"],
+            property_id=data["property_id"],
+            email_address="test_renter@example.com"
+        )
+        return redirect("/dashboard")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
 
 @app.route("/booking", methods=["POST"])
 def book_property_route():
@@ -250,7 +288,39 @@ def book_property_route():
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
+
+@app.route("/add_or_edit_address", methods=["POST"])
+def add_address_route():
+    data = request.form
+    try:
+        add_address(
+            address_id=data["address_id"],
+            street=data["street"],
+            city=data["city"],
+            state=data["state"],
+            zip_code=data["zip"]
+        )
+        return redirect("/manage_addresses.html")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
+@app.route("/add_or_edit_payment", methods=["POST"])
+def add_payment_route():
+    data = request.form
+    try:
+        add_credit_card(
+            card_number=data["cc_number"],
+            expiry_date=data["cc_exp"],
+            payment_address=data["billing_address_id"],
+            email_address="test_user@example.com"
+        )
+        return redirect("/manage_payments.html")
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
+
+
 if __name__ == "__main__":
     app.run(debug=True)
 
-#test comment
+
