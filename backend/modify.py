@@ -8,7 +8,7 @@ def get_connection():
         url="localhost",
         database="Real Estate",  
         user="postgres",            
-        password="BDLV25",    
+        password="BDLV25",     
         port=5432
     )
 # --- Register Users --- 
