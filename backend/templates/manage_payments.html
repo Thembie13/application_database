@@ -49,10 +49,8 @@
       <label for="cc-cvc">CVC:</label>
       <input id="cc-cvc" name="cc_cvc" autocomplete="cc-csc" inputmode="numeric" maxlength="4" required>
       <label for="billing_address_id">Billing Address:</label>
-      <select name="billing_address_id" id="billing_address_id" required>
-        <option value="">Select Address</option>
-        <!-- Populated dynamically -->
-      </select>
+      <input id="billing_address_id" autocomplete="cc-additional-name" required> 
+      <!-- Populated dynamically -->
       <button type="submit" class="save-btn">Save</button>
       <button type="button" class="cancel-btn" onclick="hidePaymentForm()">Cancel</button>
     </form>
