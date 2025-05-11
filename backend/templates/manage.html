@@ -17,44 +17,6 @@
       <a href="{{ url_for('login_page') }}" class="nav-link">Logout</a>
     </div>
   </nav>
-  
-<section id="property-list-section">
-  <h3>All Properties</h3>
-  <table class="property-table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Type</th>
-        <th>Location</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Available?</th>
-        <th>Sq Ft</th>
-        <th>Rooms</th>
-        <th>Building</th>
-        <th>Business</th>
-        <th>Neighborhood</th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for p in properties %}
-      <tr>
-        <td>{{ p[0] }}</td>
-        <td>{{ p[1] }}</td>
-        <td>{{ p[2] }}</td>
-        <td>{{ p[3] }}</td>
-        <td>${{ p[4] }}</td>
-        <td>{{ 'Yes' if p[5] else 'No' }}</td>
-        <td>{{ p[6] }}</td>
-        <td>{{ p[7] }}</td>
-        <td>{{ p[8] }}</td>
-        <td>{{ p[9] }}</td>
-        <td>{{ p[10] }}</td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</section>
 
   <!-- Property Details Section -->
   <section id="property-section">
