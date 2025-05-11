@@ -99,6 +99,19 @@ def add_property(property_id, type, location, description, price, availability, 
         cursor.close()
         conn.close()
 
+def get_all_properties():
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("""
+            SELECT property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id
+            FROM property
+        """)
+        return cursor.fetchall()
+    finally:
+        cursor.close()
+        conn.close()
+
 
 def modify_property(property_id, field, new_value):
     conn = get_connection()
@@ -353,7 +366,8 @@ def search_page():
 
 @app.route("/manage")
 def manage_page():
-    return render_template("manage.html")
+    properties = get_all_properties()
+    return render_template("manage.html", properties=properties)
 
 @app.route("/manage_addresses")
 def manage_addresses_page():
