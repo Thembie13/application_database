@@ -282,7 +282,7 @@ def book_property_form():
 
     if not booking_id:
         booking_id = str(uuid.uuid4())
-        
+
     try:
         book_property(
             booking_id=str(uuid.uuid4()),
