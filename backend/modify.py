@@ -242,9 +242,6 @@ def submit_property_route():
     try:
         neighborhood_id = str(uuid.uuid4())  # Auto-generate neighborhood_id
 
-        # Optional: add default neighborhood record
-        add_neighborhood(neighborhood_id, "unknown")  # You can change the default crime rate
-
         add_property(
             property_id,
             data["type"],
