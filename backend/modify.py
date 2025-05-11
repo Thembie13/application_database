@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def get_connection():
     return psycopg2.connect(
-        url="localhost",
+        host="localhost",
         database="Real Estate",  
         user="postgres",            
         password="BDLV25",     
@@ -302,19 +302,20 @@ def book_property_route():
 @app.route("/add_or_edit_address", methods=["POST"])
 def add_address_route():
     data = request.form
-    try:
-        address_id = data["address_id"].strip()
-        if not address_id:
-            address_id=str(uuid.uuid4())
+    address_id = data.get("address_id", "").strip()
 
+    if not address_id:
+        address_id=str(uuid.uuid4())
+
+    try:
         add_address(
-            address_id=data["address_id"],
+            address_id=address_id,
             street=data["street"],
             city=data["city"],
             state=data["state"],
             zip_code=data["zip"]
         )
-        return redirect("/manage_addresses.html")
+        return redirect("/manage_addresses")
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
