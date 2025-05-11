@@ -235,20 +235,34 @@ def submit_property_route():
     data = request.form
 
     property_id = data.get("property_id", "").strip()
-
+    
     if not property_id:
-        property_id = str(uuid.uuid4())
+        property_id = str(uuid.uuid4())  # Generate new UUID if blank
 
     try:
+        neighborhood_id = str(uuid.uuid4())  # Auto-generate neighborhood_id
+
+        # Optional: add default neighborhood record
+        add_neighborhood(neighborhood_id, "unknown")  # You can change the default crime rate
+
         add_property(
-            data["property_id"], data["type"], data["location"], data["description"],
-            float(data["price"]), data["availability"].lower() == "available",
-            int(data["sq_ft"]), int(data["rooms"]),
-            data["building"], data["business"], data["neighborhood"],
+            property_id,
+            data["type"],
+            data["location"],
+            data["description"],
+            float(data["price"]),
+            data["availability"].lower() == "available",
+            int(data["sq_ft"]),
+            int(data["rooms"]),
+            data["building"],
+            data["business"],
+            neighborhood_id,  # Use the generated ID
             "test_agent@example.com"
         )
         return redirect("/dashboard")
     except Exception as e:
+        import traceback
+        print(traceback.format_exc())
         return jsonify({"error": str(e)}), 400
 
 
