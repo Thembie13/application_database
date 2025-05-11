@@ -31,7 +31,16 @@
         </tr>
       </thead>
       <tbody id="address-list">
-        <!-- Populated dynamically -->
+        {% for address in addresses %} <tr>
+          <td>{{ address[1] }}</td> <!-- street -->
+          <td>{{ address[2] }}</td> <!-- city -->
+          <td>{{ address[3] }}</td> <!-- state -->
+          <td>{{ address[4] }}</td> <!-- zip -->
+          <td>
+          <!-- Optional: Add edit/delete buttons here -->
+          </td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
 
