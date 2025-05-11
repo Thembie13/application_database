@@ -23,7 +23,7 @@
     <h3>Property Details</h3>
     <form action="/submit_property" method="POST" class="property-form">
       <table class="details-table">
-        <tr><th>ID</th><td><input type="text" name="property_id" required></td></tr>
+        <input type="hidden" name="property_id" id="property_id">
         <tr><th>Type</th><td><input type="text" name="type" required></td></tr>
         <tr><th>Location</th><td><input type="text" name="location" required></td></tr>
         <tr><th>Description</th><td><input type="text" name="description" required></td></tr>
@@ -42,7 +42,6 @@
         <tr><th>Rooms</th><td><input type="number" name="rooms" required></td></tr>
         <tr><th>Building</th><td><input type="text" name="building"></td></tr>
         <tr><th>Business</th><td><input type="text" name="business"></td></tr>
-        <tr><th>Neighborhood</th><td><input type="text" name="neighborhood"></td></tr>
       </table>
       <div class="submit-container">
         <button type="submit">DONE</button>

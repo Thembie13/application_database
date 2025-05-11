@@ -220,6 +220,12 @@ def search_properties_route():
 @app.route("/submit_property", methods=["POST"])
 def submit_property_route():
     data = request.form
+
+    property_id = data.get("property_id", "").strip()
+
+    if not property_id:
+        property_id = str(uuid.uuid4())
+
     try:
         add_property(
             data["property_id"], data["type"], data["location"], data["description"],
@@ -236,6 +242,7 @@ def submit_property_route():
 @app.route("/property/add", methods=["POST"])
 def add_property_route():
     data = request.json
+
     try:
         add_property(
             data["property_id"], data["type"], data["location"], data["description"],
@@ -270,6 +277,12 @@ def delete_property_route(property_id):
 @app.route("/book_property", methods=["POST"])
 def book_property_form():
     data = request.form
+
+    booking_id = data.get("booking_id", "").strip()
+
+    if not booking_id:
+        booking_id = str(uuid.uuid4())
+        
     try:
         book_property(
             booking_id=str(uuid.uuid4()),
