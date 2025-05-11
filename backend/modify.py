@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 def get_connection():
     return psycopg2.connect(
-        host="localhost",
+        url="localhost",
         database="Real Estate",  
         user="postgres",            
         password="BDLV25",     
@@ -20,10 +20,8 @@ def register_user(email_address, name, address_id, preferred_location, is_agent=
     try:
         cursor.execute("INSERT INTO users (email_address, name, address_id, preferred_location) VALUES (%s, %s, %s, %s)", (email_address, name, address_id, preferred_location))
 
-
         if is_agent and agent_info:
             cursor.execute("INSERT INTO agent (email_address, job_title, agency, contact_info) VALUES (%s, %s, %s, %s)", (email_address, agent_info))
-
 
         if is_renter and renter_preference:
             cursor.execute("INSERT INTO renter (email_address, renter_preference) VALUES (%s, %s)", (email_address, renter_preference))
@@ -31,6 +29,7 @@ def register_user(email_address, name, address_id, preferred_location, is_agent=
     finally:
         cursor.close()
         conn.close()
+
 
 def add_address(address_id, street, city, state, zip_code):
     conn = get_connection()
@@ -42,6 +41,15 @@ def add_address(address_id, street, city, state, zip_code):
         cursor.close()
         conn.close()
 
+def get_all_addresses():
+    conn = get_connection()
+    cursor = conn.cursor()
+    try:
+        cursor.execute("SELECT address_id, street, city, state, zip_code FROM address")
+        return cursor.fetchall()
+    finally:
+        cursor.close()
+        conn.close()
 
 def add_credit_card(card_number, expiry_date, payment_address, email_address):
     conn = get_connection()
@@ -294,20 +302,19 @@ def book_property_route():
 @app.route("/add_or_edit_address", methods=["POST"])
 def add_address_route():
     data = request.form
-    address_id = data.get("address_id", "").strip()
-
-    if not address_id:
-        address_id=str(uuid.uuid4())
-
     try:
+        address_id = data["address_id"].strip()
+        if not address_id:
+            address_id=str(uuid.uuid4())
+
         add_address(
-            address_id=address_id,
+            address_id=data["address_id"],
             street=data["street"],
             city=data["city"],
             state=data["state"],
             zip_code=data["zip"]
         )
-        return redirect("/manage_addresses")
+        return redirect("/manage_addresses.html")
     except Exception as e:
         return jsonify({"error": str(e)}), 400
 
@@ -336,7 +343,8 @@ def manage_page():
 
 @app.route("/manage_addresses")
 def manage_addresses_page():
-    return render_template("manage_addresses.html")
+    addresses = get_all_addresses()
+    return render_template("manage_addresses.html", addresses=addresses)
 
 @app.route("/manage_payments")
 def manage_payments_page():
