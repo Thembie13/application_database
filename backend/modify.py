@@ -84,14 +84,14 @@ def add_nearby_school(neighborhood_id, school_name, crime_rates):
         conn.close()
 
 
-def add_property(property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id, agent_email):
+def add_property(property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, agent_email):
     conn = get_connection()
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            INSERT INTO property (property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id)
+            INSERT INTO property (property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type)
             VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """, (property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id))
+        """, (property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type))
         
         cursor.execute("INSERT INTO modifies (email_address, property_id) VALUES (%s, %s)", (agent_email, property_id))
         conn.commit()
@@ -104,7 +104,7 @@ def get_all_properties():
     cursor = conn.cursor()
     try:
         cursor.execute("""
-            SELECT property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type, neighborhood_id
+            SELECT property_id, type, location, description, price, availability, square_footage, number_of_rooms, building_type, business_type
             FROM property
         """)
         return cursor.fetchall()
@@ -240,7 +240,6 @@ def submit_property_route():
         property_id = str(uuid.uuid4())  # Generate new UUID if blank
 
     try:
-        neighborhood_id = str(uuid.uuid4())  # Auto-generate neighborhood_id
 
         add_property(
             property_id,
@@ -253,7 +252,6 @@ def submit_property_route():
             int(data["rooms"]),
             data["building"],
             data["business"],
-            neighborhood_id,  # Use the generated ID
             "test_agent@example.com"
         )
         return redirect("/dashboard")
@@ -272,7 +270,7 @@ def add_property_route():
             data["property_id"], data["type"], data["location"], data["description"],
             data["price"], data["availability"], data["square_footage"],
             data["number_of_rooms"], data["building_type"], data["business_type"],
-            data["neighborhood_id"], data["agent_email"]
+            data["agent_email"]
         )
         return jsonify({"status": "success"})
     except Exception as e:
