@@ -1,2 +1,2 @@
 # application_database
-cs 425
+using CSS, HTML, JavaScript, SQL, and Python 
